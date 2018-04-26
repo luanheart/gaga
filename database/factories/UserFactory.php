@@ -1,6 +1,7 @@
 <?php
 
 use Faker\Generator as Faker;
+use Carbon\Carbon;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,11 +14,22 @@ use Faker\Generator as Faker;
 |
 */
 
-$factory->define(App\User::class, function (Faker $faker) {
+$factory->define(App\Models\User::class, function (Faker $faker) {
+
+    $now = Carbon::now()->toDateTimeString();
+
     return [
-        'name' => $faker->name,
-        'email' => $faker->unique()->safeEmail,
-        'password' => '$2y$10$TKh8H1.PfQx37YgCzwiKb.KjNyWgaHb9cbcoQgdIVFlYg7B77UdFm', // secret
-        'remember_token' => str_random(10),
+        'openid' => str_random(10),
+        'unionid' => str_random(10),
+        'nickname' => $faker->name,
+        'birthday' => $faker->date(),
+        'sex' => $faker->randomElement([0, 1, 2]),
+        'height' => $faker->numberBetween(160, 190),
+        'weight' => $faker->numberBetween(50, 100),
+        'attribute' => $faker->numberBetween(0, 7),
+        'wechat' => str_random(8),
+        'job' => $faker->jobTitle,
+        'created_at' => $now,
+        'updated_at' => $now
     ];
 });

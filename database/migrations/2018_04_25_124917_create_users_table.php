@@ -20,13 +20,13 @@ class CreateUsersTable extends Migration
             $table->string('nickname')->comment('昵称');
             $table->string('avatar')->comment('头像');
             $table->date('birthday')->comment('生日');
-            $table->integer('sex')->comment('1男 2女');
-            $table->float('height')->comment('身高cm');
-            $table->float('weight')->comment('体重kg');
-            $table->integer('attribute')->comment('自身属性');
+            $table->integer('sex')->default(0)->comment('1男 2女');
+            $table->integer('height')->default(0)->comment('身高cm');
+            $table->integer('weight')->default(0)->comment('体重kg');
+            $table->integer('attribute')->default(0)->comment('自身属性');
             $table->string('wechat')->comment('微信号');
             $table->string('job')->comment('职业');
-            $table->integer('income')->comment('年收入');
+            $table->integer('income')->default(0)->comment('年收入');
             $table->string('constellation')->comment('星座');
             $table->string('blood_type')->comment('血型');
             $table->string('dream')->comment('理想型');
@@ -39,7 +39,7 @@ class CreateUsersTable extends Migration
             $table->string('country')->comment('国家');
             $table->string('province')->comment('省');
             $table->string('city')->comment('市');
-            $table->integer('status')->comment('用户状态 0正常 1冻结');
+            $table->integer('status')->default(0)->comment('用户状态 0正常 1冻结');
             $table->timestamps();
         });
     }
