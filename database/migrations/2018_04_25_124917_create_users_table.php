@@ -25,17 +25,13 @@ class CreateUsersTable extends Migration
             $table->integer('weight')->default(0)->comment('体重kg');
             $table->integer('attribute')->default(0)->comment('自身属性');
             $table->string('wechat')->comment('微信号');
+            $table->string('wechat_img')->comment('微信号图片');
             $table->string('job')->comment('职业');
             $table->integer('income')->default(0)->comment('年收入');
             $table->string('constellation')->comment('星座');
             $table->string('blood_type')->comment('血型');
             $table->string('dream')->comment('理想型');
-            $table->string('family_view')->comment('家庭观');
-            $table->string('educational_view')->comment('教育观');
             $table->string('introduction')->comment('简介');
-            $table->string('kid')->comment('是否要小孩 1要 2不要');
-            $table->string('house')->comment('1有房，2没有房');
-            $table->string('car')->comment('1有车，2没有车');
             $table->string('country')->comment('国家');
             $table->string('province')->comment('省');
             $table->string('city')->comment('市');

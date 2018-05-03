@@ -28,6 +28,10 @@ $api->version('v1', [
             $api->get('user/{user}', 'UsersController@show');
             // 当前登录用户信息
             $api->get('user', 'UsersController@me');
+
+            $api->post('likes', 'LikesController@create');
+            $api->post('collections', 'CollectionsController@create');
+            $api->get('collections', 'CollectionsController@index');
         });
     });
 });

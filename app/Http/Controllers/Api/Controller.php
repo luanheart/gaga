@@ -3,21 +3,26 @@
 namespace App\Http\Controllers\Api;
 
 use App\Helpers\Error;
+use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller as BaseController;
 use Illuminate\Support\Facades\Auth;
 use Dingo\Api\Routing\Helpers;
 
+/**
+ * Class Controller
+ * @package App\Http\Controllers\Api
+ *
+ * @property User $user
+ */
 class Controller extends BaseController
 {
     use Helpers;
 
-    public $user;
     public $error;
 
     public function __construct()
     {
-        $this->user = Auth::user();
         $this->error = new Error();
     }
 
