@@ -7,9 +7,11 @@ use League\Fractal\TransformerAbstract;
 
 class UserTransformer extends TransformerAbstract
 {
+    protected $availableIncludes = ['tags', 'dreams'];
+
     public function transform(User $user)
     {
-        return [
+        $data = [
             'id' => $user->id,
             'nickname' => $user->nickname,
             'sex' => $user->sex,
@@ -22,18 +24,28 @@ class UserTransformer extends TransformerAbstract
             'income' => $user->income,
             'constellation' => $user->constellation,
             'blood_type' => $user->blood_type,
-            'dream' => $user->dream,
-            'family_view' => $user->family_view,
-            'educational_view' => $user->educational_view,
+            'emotion' => $user->emotion,
             'introduction' => $user->introduction,
-            'kid' => $user->kid,
-            'house' => $user->house,
-            'car' => $user->car,
             'country' => $user->country,
             'province' => $user->province,
             'city' => $user->city,
             'created_at' => $user->created_at->toDateTimeString(),
             'updated_at' => $user->updated_at->toDateTimeString(),
         ];
+        if (\Auth::user()->id === $user->id) {
+            $data['wechat'] = $user->wechat;
+            $data['wechat_img'] = $user->wechat_img;
+        }
+        return $data;
+    }
+
+    public function includeTags(User $user)
+    {
+        return $this->collection($user->tags, new TagTransformer());
+    }
+
+    public function includeDreams(User $user)
+    {
+        return $this->collection($user->dreams, new TagTransformer());
     }
 }

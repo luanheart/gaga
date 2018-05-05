@@ -19,27 +19,23 @@ class User extends Authenticatable implements JWTSubject
         'openid',
         'unionid',
         'nickname',
+        'avatar',
         'birthday',
         'sex',
         'height',
         'weight',
         'attribute',
         'wechat',
+        'wechat_img',
         'job',
         'income',
         'constellation',
         'blood_type',
-        'dream',
-        'family_view',
-        'educational_view',
+        'emotion',
         'introduction',
-        'kid',
-        'house',
-        'car',
         'country',
         'province',
         'city',
-        'status'
     ];
 
     /**
@@ -63,5 +59,15 @@ class User extends Authenticatable implements JWTSubject
     public function collections()
     {
         return $this->belongsToMany(User::class, 'collections', 'user_id', 'target_user_id');
+    }
+
+    public function tags()
+    {
+        return $this->belongsToMany('App\Models\Tag', 'user_tags');
+    }
+
+    public function dreams()
+    {
+        return $this->belongsToMany('App\Models\Tag', 'dream_tags');
     }
 }

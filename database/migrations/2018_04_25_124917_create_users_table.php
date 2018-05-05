@@ -30,7 +30,7 @@ class CreateUsersTable extends Migration
             $table->integer('income')->default(0)->comment('年收入');
             $table->string('constellation')->comment('星座');
             $table->string('blood_type')->comment('血型');
-            $table->string('dream')->comment('理想型');
+            $table->integer('emotion')->comment('感情状态 1单身 2恋爱中 3稳定关系 4开放关系');
             $table->string('introduction')->comment('简介');
             $table->string('country')->comment('国家');
             $table->string('province')->comment('省');
