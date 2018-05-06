@@ -7,7 +7,7 @@ use App\Models\User;
 class UserTransformer
 {
 
-    public static function transform(User $user, $with_tags = false)
+    public static function transform(User $user, $with_tags = false, $with_wechat = false)
     {
         $data = [
             'id' => $user->id,
@@ -31,6 +31,10 @@ class UserTransformer
         if ($with_tags) {
             $data['tags'] = TagTransformer::transformCollection($user->tags);
             $data['dreams'] = TagTransformer::transformCollection($user->dreams);
+        }
+        if ($with_wechat) {
+            $data['wechat'] = $user->wechat;
+            $data['wechat_img'] = $user->wechat_img;
         }
         return $data;
     }

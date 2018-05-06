@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Requests\Api\UserRequest;
+use App\Models\Call;
 use App\Models\User;
 use App\Transformers\UserTransformer;
 use Illuminate\Http\Request;
@@ -11,18 +12,20 @@ class UsersController extends Controller
 {
     public function show(Request $request, User $user)
     {
-        return $this->returnData(UserTransformer::transform($user, true));
+        //是否显示微信号
+        $wechat = Call::isShowWechat($this->user, $user);
+        return $this->returnData(UserTransformer::transform($user, true, $wechat));
     }
 
     public function me()
     {
-        return $this->returnData(UserTransformer::transform($this->user, true));
+        return $this->returnData(UserTransformer::transform($this->user, true, true));
     }
 
     public function update(UserRequest $request)
     {
         $user = $this->user;
         $user->update($request->all());
-        return $this->returnData(UserTransformer::transform($user, true));
+        return $this->returnData(UserTransformer::transform($user, true, true));
     }
 }
