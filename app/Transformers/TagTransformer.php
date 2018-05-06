@@ -3,17 +3,24 @@
 namespace App\Transformers;
 
 use App\Models\Tag;
-use App\Models\User;
-use League\Fractal\TransformerAbstract;
 
-class TagTransformer extends TransformerAbstract
+class TagTransformer
 {
-    public function transform(Tag $tag)
+    public static function transform(Tag $tag)
     {
         return [
             'id' => $tag->id,
             'name' => $tag->name,
             'type' => $tag->type
         ];
+    }
+
+    public static function transformCollection($collection)
+    {
+        $data = [];
+        foreach ($collection as $item) {
+            $data[] = self::transform($item);
+        }
+        return $data;
     }
 }

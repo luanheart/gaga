@@ -29,29 +29,8 @@ class UserTransformer
             'city' => $user->city,
         ];
         if ($with_tags) {
-            $tags = [];
-            if ($raw_tags = $user->tags) {
-                foreach ($raw_tags as $item) {
-                    $tags[] = [
-                        'id' => $item->id,
-                        'name' => $item->name,
-                        'type' => $item->type
-                    ];
-                }
-            }
-            $data['tags'] = $tags;
-
-            $dreams = [];
-            if ($raw_dreams = $user->dreams) {
-                foreach ($raw_dreams as $item) {
-                    $dreams[] = [
-                        'id' => $item->id,
-                        'name' => $item->name,
-                        'type' => $item->type
-                    ];
-                }
-            }
-            $data['dreams'] = $dreams;
+            $data['tags'] = TagTransformer::transformCollection($user->tags);
+            $data['dreams'] = TagTransformer::transformCollection($user->dreams);
         }
         return $data;
     }
