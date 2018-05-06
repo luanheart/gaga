@@ -31,9 +31,13 @@ $api->version('v1', [
             $api->patch('user', 'UsersController@update');
             $api->post('user/tags', 'UserTagsController@create');
 
+            $api->post('calls', 'CallsController@create');
+
             $api->post('likes', 'LikesController@create');
             $api->post('collections', 'CollectionsController@create');
             $api->get('collections', 'CollectionsController@index');
+
+            $api->post('reports', 'ReportsController@create');
         });
     });
 });

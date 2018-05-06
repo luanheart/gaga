@@ -17,7 +17,7 @@ class AuthorizationsController extends Controller
         if ($request->test_id) {
             $user = User::find($request->test_id);
             $token = Auth::guard('api')->fromUser($user);
-            return $this->respondWithToken($token)->setStatusCode(201);
+            return $this->respondWithToken($token);
         }
 
         switch ($type) {
@@ -82,13 +82,13 @@ class AuthorizationsController extends Controller
         }
 
         $token = Auth::guard('api')->fromUser($user);
-        return $this->respondWithToken($token)->setStatusCode(201);
+        return $this->respondWithToken($token);
     }
 
 
     protected function respondWithToken($token)
     {
-        return $this->response->array([
+        return $this->returnData([
             'access_token' => $token,
             'token_type' => 'Bearer',
             'expires_in' => Auth::guard('api')->factory()->getTTL() * 60

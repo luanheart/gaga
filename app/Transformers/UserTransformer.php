@@ -3,13 +3,11 @@
 namespace App\Transformers;
 
 use App\Models\User;
-use League\Fractal\TransformerAbstract;
 
-class UserTransformer extends TransformerAbstract
+class UserTransformer
 {
-    protected $availableIncludes = ['tags', 'dreams'];
 
-    public function transform(User $user)
+    public static function transform(User $user, $with_tags = false)
     {
         $data = [
             'id' => $user->id,
@@ -29,23 +27,41 @@ class UserTransformer extends TransformerAbstract
             'country' => $user->country,
             'province' => $user->province,
             'city' => $user->city,
-            'created_at' => $user->created_at->toDateTimeString(),
-            'updated_at' => $user->updated_at->toDateTimeString(),
         ];
-        if (\Auth::user()->id === $user->id) {
-            $data['wechat'] = $user->wechat;
-            $data['wechat_img'] = $user->wechat_img;
+        if ($with_tags) {
+            $tags = [];
+            if ($raw_tags = $user->tags) {
+                foreach ($raw_tags as $item) {
+                    $tags[] = [
+                        'id' => $item->id,
+                        'name' => $item->name,
+                        'type' => $item->type
+                    ];
+                }
+            }
+            $data['tags'] = $tags;
+
+            $dreams = [];
+            if ($raw_dreams = $user->dreams) {
+                foreach ($raw_dreams as $item) {
+                    $dreams[] = [
+                        'id' => $item->id,
+                        'name' => $item->name,
+                        'type' => $item->type
+                    ];
+                }
+            }
+            $data['dreams'] = $dreams;
         }
         return $data;
     }
 
-    public function includeTags(User $user)
+    public static function transformCollection($collection)
     {
-        return $this->collection($user->tags, new TagTransformer());
-    }
-
-    public function includeDreams(User $user)
-    {
-        return $this->collection($user->dreams, new TagTransformer());
+        $data = [];
+        foreach ($collection as $item) {
+            $data[] = self::transform($item);
+        }
+        return $data;
     }
 }

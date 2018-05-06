@@ -29,7 +29,17 @@ class Controller extends BaseController
     public function returnData($data = [])
     {
         return [
-            'ret' => 1,
+            'status_code' => 200,
+            'data' => $data
+        ];
+    }
+
+    public function returnPaginator($paginator, $data = [])
+    {
+        return [
+            'status_code' => 200,
+            'total' => $paginator->total(),
+            'current_page' => $paginator->currentPage(),
             'data' => $data
         ];
     }
@@ -37,9 +47,8 @@ class Controller extends BaseController
     public function returnError($msg = '', $code = -1)
     {
         return [
-            'ret' => -1,
-            'code' => $code,
-            'msg' => $msg
+            'status_code' => $code,
+            'message    ' => $msg
         ];
     }
 }

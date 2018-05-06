@@ -35,6 +35,6 @@ class UserTagsController extends Controller
             $user->dreams()->attach($dream_ids);
         }
 
-        return $this->response->noContent();
+        return $this->returnData();
     }
 }

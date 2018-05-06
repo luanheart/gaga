@@ -15,7 +15,7 @@ class CollectionsController extends Controller
         $collections = $this->user->collections()
             ->orderBy('collections.created_at', 'desc')
             ->paginate(20);
-        return $this->response->paginator($collections, new UserTransformer());
+        return $this->returnPaginator($collections, UserTransformer::transformCollection($collections->items()));
     }
 
     public function create(CollectionRequest $request)
@@ -29,6 +29,6 @@ class CollectionsController extends Controller
         } else {
             $like->save();
         }
-        return $this->response->noContent();
+        return $this->returnData();
     }
 }

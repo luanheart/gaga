@@ -19,6 +19,6 @@ class LikesController extends Controller
         ]);
         $like->type = $request->dislike ? Like::TYPE_DISLIKE : Like::TYPE_LIKE;
         $like->save();
-        return $this->response->noContent();
+        return $this->returnData();
     }
 }
