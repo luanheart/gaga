@@ -25,6 +25,9 @@ $api->version('v1', [
         $api->post('socials/{social_type}/authorizations', 'AuthorizationsController@socialStore');
 
         $api->group(['middleware' => 'api.auth'], function ($api) {
+
+            $api->get('user/dream', 'UsersController@dream');
+
             $api->get('user/{user}', 'UsersController@show');
             // 当前登录用户信息
             $api->get('user', 'UsersController@me');

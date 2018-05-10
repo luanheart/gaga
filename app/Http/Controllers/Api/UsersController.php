@@ -10,6 +10,14 @@ use Illuminate\Http\Request;
 
 class UsersController extends Controller
 {
+    public function dream(Request $request)
+    {
+        //先随机一个user
+        $count = User::count();
+        $user_id = rand(1, $count);
+        return $this->returnData(UserTransformer::transform(User::find($user_id)));
+    }
+
     public function show(Request $request, User $user)
     {
         //是否显示微信号
