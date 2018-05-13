@@ -48,7 +48,7 @@ class Controller extends BaseController
     {
         return [
             'status_code' => $code,
-            'message    ' => $msg
+            'message' => $msg
         ];
     }
 }

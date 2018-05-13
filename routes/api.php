@@ -26,21 +26,22 @@ $api->version('v1', [
 
         $api->group(['middleware' => 'api.auth'], function ($api) {
 
-            $api->get('user/dream', 'UsersController@dream');
+            $api->get('user/dream', 'UsersController@dream'); //下一个
 
-            $api->get('user/{user}', 'UsersController@show');
+            $api->get('user/{user}', 'UsersController@show'); //查看用户信息
             // 当前登录用户信息
             $api->get('user', 'UsersController@me');
             $api->patch('user', 'UsersController@update');
             $api->post('user/tags', 'UserTagsController@create');
 
-            $api->post('calls', 'CallsController@create');
+            $api->post('calls', 'CallsController@create'); //交换微信号
+            $api->post('likes', 'LikesController@create'); //喜欢
+            $api->post('collections', 'CollectionsController@create'); //收藏
+            $api->post('hearts', 'HeartsController@create'); //点赞/发射小心心
 
-            $api->post('likes', 'LikesController@create');
-            $api->post('collections', 'CollectionsController@create');
-            $api->get('collections', 'CollectionsController@index');
+            $api->get('collections', 'CollectionsController@index'); //收藏列表
 
-            $api->post('reports', 'ReportsController@create');
+            $api->post('reports', 'ReportsController@create'); //举报
         });
     });
 });
