@@ -3,11 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Requests\Api\CollectionRequest;
-use App\Models\Collection;
 use App\Models\Heart;
-use App\Models\Like;
-use App\Transformers\UserTransformer;
-use Illuminate\Http\Request;
 
 class HeartsController extends Controller
 {

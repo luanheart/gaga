@@ -45,3 +45,22 @@ $api->version('v1', [
         });
     });
 });
+
+$api->version('v1', [
+    'namespace' => 'App\Http\Controllers\Admin',
+    'middleware' => ['auth.administrator', 'serializer:array', 'bindings']
+], function($api) {
+    $api->group(['prefix' => 'admin'], function ($api) {
+
+        //登录
+        $api->post('login', 'AdministratorsController@login');
+
+        $api->group(['middleware' => 'api.auth'], function ($api) {
+            //管理员相关
+            $api->get('administrators', 'AdministratorsController@index');
+            $api->post('administrators', 'AdministratorsController@store');
+            $api->patch('administrators/{administrator}', 'AdministratorsController@update');
+            $api->delete('administrators/{administrator}', 'AdministratorsController@destroy');
+        });
+    });
+});
