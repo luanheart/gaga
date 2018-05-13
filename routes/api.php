@@ -75,6 +75,10 @@ $api->version('v1', [
             //user 相关
             $api->get('users', 'UsersController@index');
             $api->patch('users/{user}', 'UsersController@udpate');
+
+            //举报相关
+            $api->get('reports', 'ReportsController@index');
+            $api->patch('reports/{report}', 'ReportsController@update');
         });
     });
 });
