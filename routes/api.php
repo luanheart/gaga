@@ -71,6 +71,10 @@ $api->version('v1', [
             $api->post('tag_types', 'TagTypesController@store');
             $api->patch('tag_types/{tag_type}', 'TagTypesController@update');
             $api->delete('tag_types/{tag_type}', 'TagTypesController@destroy');
+
+            //user 相关
+            $api->get('users', 'UsersController@index');
+            $api->patch('users/{user}', 'UsersController@udpate');
         });
     });
 });

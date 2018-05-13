@@ -19,6 +19,7 @@ class CreateReportsTable extends Migration
             $table->integer('target_user_id')->comment('目标用户id');
             $table->text('img')->comment('截图');
             $table->string('reason')->comment('原因');
+            $table->integer('status')->comment('状态 0正常 1已处理 2忽略');
             $table->timestamps();
         });
     }
