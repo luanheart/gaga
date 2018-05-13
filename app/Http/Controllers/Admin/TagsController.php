@@ -19,9 +19,19 @@ class TagsController extends Controller
         if ($type = $request->type) {
             $query->where('type', $type);
         }
-        $tags = $query->paginate($request->input('per_page', 20));
+        $tags = $query->with('typeName')->paginate($request->input('per_page', 20));
+        $data = [];
+        foreach ($tags as $item) {
+            $data[] = [
+                'id' => $item->id,
+                'name' => $item->name,
+                'type' => $item->type,
+                'type_name' => $item->typeName ? $item->typeName->type_name : '',
+                'created_at' => (string)$item->created_at
+            ];
+        }
 
-        return $this->returnPaginator($tags, $tags->items());
+        return $this->returnPaginator($tags, $data);
     }
 
     public function store(TagRequest $request, Tag $tag)

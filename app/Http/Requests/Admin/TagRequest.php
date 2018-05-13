@@ -19,12 +19,12 @@ class TagRequest extends FormRequest
             case 'POST':
                 return [
                     'name' => 'required|string|unique:tags',
-                    'type' => 'integer|exist:tag_types,id'
+                    'type' => 'integer|exists:tag_types,id'
                 ];
             case 'PATCH':
                 return [
                     'name' => 'string',
-                    'type' => 'integer|exist:tag_types,id'
+                    'type' => 'integer|exists:tag_types,id'
 
                 ];
             default:
