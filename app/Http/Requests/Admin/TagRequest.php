@@ -18,7 +18,7 @@ class TagRequest extends FormRequest
         switch ($this->method()) {
             case 'POST':
                 return [
-                    'name' => 'required|string',
+                    'name' => 'required|string|unique:tags',
                     'type' => 'integer|exist:tag_types,id'
                 ];
             case 'PATCH':

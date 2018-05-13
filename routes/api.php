@@ -63,6 +63,10 @@ $api->version('v1', [
             $api->delete('administrators/{administrator}', 'AdministratorsController@destroy');
 
             //tag 相关
+            $api->get('tags', 'TagsController@index');
+            $api->post('tags', 'TagsController@store');
+            $api->patch('tags/{tag}', 'TagsController@update');
+            $api->delete('tags/{tag}', 'TagsController@destroy');
             $api->get('tag_types', 'TagTypesController@index');
             $api->post('tag_types', 'TagTypesController@store');
             $api->patch('tag_types/{tag_type}', 'TagTypesController@update');
