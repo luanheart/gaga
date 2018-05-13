@@ -61,6 +61,12 @@ $api->version('v1', [
             $api->post('administrators', 'AdministratorsController@store');
             $api->patch('administrators/{administrator}', 'AdministratorsController@update');
             $api->delete('administrators/{administrator}', 'AdministratorsController@destroy');
+
+            //tag 相关
+            $api->get('tag_types', 'TagTypesController@index');
+            $api->post('tag_types', 'TagTypesController@store');
+            $api->patch('tag_types/{tag_type}', 'TagTypesController@update');
+            $api->delete('tag_types/{tag_type}', 'TagTypesController@destroy');
         });
     });
 });
